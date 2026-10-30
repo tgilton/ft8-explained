@@ -4,6 +4,13 @@ Companion code for the white paper **"How FT8 Really Works"** (Terry Gilton, W7T
 A small, readable FT8 encoder, waveform synthesizer and receiver in Python, used to generate every figure
 and number in the paper. Educational code, not a WSJT-X replacement.
 
+## The paper
+
+**[Read the white paper (PDF)](docs/How_FT8_Really_Works.pdf)**: a plain-language explanation of the FT8 signal, the
+15-second cycle, 77-bit message packing, the CRC, LDPC coding, Costas synchronization, and what "decoding at -20 dB"
+means in light of Shannon's theorem. It is written for working hams; the quantitative details are in boxed
+"Going deeper" sections and appendices. Every figure and number in it comes from the code in this repository.
+
 | File | Purpose |
 |---|---|
 | `ft8.py` | Message packing (77 bits), CRC-14, LDPC(174,91) encoder, Gray map, Costas insertion, GFSK synthesis |

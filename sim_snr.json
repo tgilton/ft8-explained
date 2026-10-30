@@ -1,0 +1,150 @@
+{
+ "ideal": {
+  "-25": {
+   "n": 250,
+   "good": 0,
+   "bad": 0,
+   "mean_iters": null
+  },
+  "-24": {
+   "n": 250,
+   "good": 0,
+   "bad": 0,
+   "mean_iters": null
+  },
+  "-23": {
+   "n": 250,
+   "good": 0,
+   "bad": 0,
+   "mean_iters": null
+  },
+  "-22": {
+   "n": 250,
+   "good": 0,
+   "bad": 0,
+   "mean_iters": null
+  },
+  "-21": {
+   "n": 250,
+   "good": 1,
+   "bad": 0,
+   "mean_iters": 15.0
+  },
+  "-20": {
+   "n": 250,
+   "good": 38,
+   "bad": 0,
+   "mean_iters": 11.026315789473685
+  },
+  "-19": {
+   "n": 250,
+   "good": 209,
+   "bad": 0,
+   "mean_iters": 5.909090909090909
+  },
+  "-18": {
+   "n": 250,
+   "good": 250,
+   "bad": 0,
+   "mean_iters": 2.448
+  },
+  "-17": {
+   "n": 250,
+   "good": 250,
+   "bad": 0,
+   "mean_iters": 1.356
+  },
+  "-16": {
+   "n": 250,
+   "good": 250,
+   "bad": 0,
+   "mean_iters": 1.016
+  },
+  "-15": {
+   "n": 250,
+   "good": 250,
+   "bad": 0,
+   "mean_iters": 1.008
+  },
+  "-14": {
+   "n": 250,
+   "good": 250,
+   "bad": 0,
+   "mean_iters": 1.0
+  }
+ },
+ "sync": {
+  "-25": {
+   "n": 250,
+   "good": 0,
+   "bad": 0,
+   "mean_iters": null
+  },
+  "-24": {
+   "n": 250,
+   "good": 0,
+   "bad": 0,
+   "mean_iters": null
+  },
+  "-23": {
+   "n": 250,
+   "good": 0,
+   "bad": 0,
+   "mean_iters": null
+  },
+  "-22": {
+   "n": 250,
+   "good": 0,
+   "bad": 0,
+   "mean_iters": null
+  },
+  "-21": {
+   "n": 250,
+   "good": 1,
+   "bad": 0,
+   "mean_iters": 12.0
+  },
+  "-20": {
+   "n": 250,
+   "good": 40,
+   "bad": 0,
+   "mean_iters": 13.55
+  },
+  "-19": {
+   "n": 250,
+   "good": 180,
+   "bad": 0,
+   "mean_iters": 5.894444444444445
+  },
+  "-18": {
+   "n": 250,
+   "good": 249,
+   "bad": 0,
+   "mean_iters": 2.642570281124498
+  },
+  "-17": {
+   "n": 250,
+   "good": 250,
+   "bad": 0,
+   "mean_iters": 1.352
+  },
+  "-16": {
+   "n": 250,
+   "good": 250,
+   "bad": 0,
+   "mean_iters": 1.072
+  },
+  "-15": {
+   "n": 250,
+   "good": 250,
+   "bad": 0,
+   "mean_iters": 1.0
+  },
+  "-14": {
+   "n": 250,
+   "good": 250,
+   "bad": 0,
+   "mean_iters": 1.0
+  }
+ }
+}

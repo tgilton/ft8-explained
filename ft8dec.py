@@ -72,7 +72,10 @@ def tone_matrix(x, t0, f0):
     ok = (idx[:, 0] >= 0) & (idx[:, -1] < len(x))
     seg = np.zeros((NSYM, SPS))
     seg[ok] = x[idx[ok]]
-    S = seg @ E.T
+    with np.errstate(all='ignore'):      # some macOS numpy builds raise spurious FP warnings in matmul
+        S = seg @ E.T
+    if not np.isfinite(S).all():
+        raise FloatingPointError('non-finite values in the tone matrix')
     return S
 
 def sync_metric(S):
@@ -161,7 +164,8 @@ def sync_energy(x, t0, f0):
     idx = t0 + _SYNC_SYMS[:, None] * SPS + n[None, :]
     if idx.min() < 0 or idx.max() >= len(x):
         return 0.0
-    en = np.abs(x[idx] @ E.T) ** 2                       # 21 x 8
+    with np.errstate(all='ignore'):
+        en = np.abs(x[idx] @ E.T) ** 2                   # 21 x 8
     num = en[np.arange(21), _SYNC_TONE].sum()
     return num / max(en.sum() - num, 1e-30)
 

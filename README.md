@@ -27,9 +27,12 @@ means in light of Shannon's theorem. It is written for working hams; the quantit
 ## Quick start
 
     pip install numpy scipy matplotlib
-    python3 ft8.py "CQ W7TLG DN13"      # prints the 79 tones
-    python3 ft8dec.py                    # self-test: decode at several SNRs
-    python3 sim_snr.py 250               # Monte Carlo (about 4 minutes on 2 cores)
+    python3 ft8.py "CQ W7TLG DN13"
+    python3 ft8dec.py
+    python3 sim_snr.py 250
+
+The first prints the 79 tones of the transmission, the second decodes the message at several SNRs as a self-test, and the
+third runs the Monte Carlo decoding simulation (about 4 minutes on 2 cores).
 
 ## Validation and limits
 

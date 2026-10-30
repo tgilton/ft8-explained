@@ -102,7 +102,13 @@ def pack_standard(call1, call2, extra):
 
 def pack_free(text):
     """Message type 0.0 (free text): 13 characters of base 42 -> 71 bits, then n3=0, i3=0."""
-    t = text.upper()[:13].ljust(13)       # left-justified, padded with blanks on the right
+    t = text.upper()
+    if len(t) > 13:
+        raise ValueError('free text is limited to 13 characters (got %d: %r)' % (len(t), text))
+    bad = sorted(set(t) - set(FREE))
+    if bad:
+        raise ValueError('characters not allowed in free text: %s (allowed: %s)' % (''.join(bad), FREE.strip() or FREE))
+    t = t.ljust(13)                       # left-justified, padded with blanks on the right
     v = 0
     for ch in t:
         v = v * 42 + FREE.index(ch)

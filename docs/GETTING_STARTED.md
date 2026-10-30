@@ -17,9 +17,11 @@ reproduce the paper's figures. You need basic Python; no radio, no WSJT-X, and n
 git clone https://github.com/tgilton/ft8-explained
 cd ft8-explained
 python3 -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+On Windows, activate the environment with `.venv\Scripts\activate` instead of the `source` line.
 
 Run everything from the repository root (the folder that contains `ft8.py`). The modules import each other and read
 `ldpc_tables.npz` from the same folder.
@@ -27,9 +29,12 @@ Run everything from the repository root (the folder that contains `ft8.py`). The
 Check that it works:
 
 ```bash
-python3 ft8.py "CQ W7TLG DN13"     # prints the 79 tones of the transmission
-python3 ft8dec.py                  # self-test: decodes the message at 0, -10, -15, -18, -20 and -22 dB
+python3 ft8.py "CQ W7TLG DN13"
+python3 ft8dec.py
 ```
+
+The first command prints the 79 tones of the transmission, and the second is a self-test that decodes the message at 0, -10, -15, -18, -20 and -22 dB.
+Put the message in quotes, and do not paste a trailing `# comment` onto a command line: macOS Terminal (zsh) passes it to the program as part of the message.
 
 The first command should print `3140652000000001004024452502314335263140652542352241012370734366635211003140652`.
 The self-test should decode down to -18 dB and fail at -20 and -22 dB, which is the cliff described in Section 9.5 of the paper.
@@ -107,11 +112,16 @@ has extra decoding methods (ordered-statistics decoding and others) that this co
 ## 6. Reproduce the paper's numbers and figures
 
 ```bash
-python3 capacity.py          # 8-FSK capacity and the SNR ladder -> capacity.json  (about 10 seconds)
-python3 sim_snr.py 250       # decode probability vs SNR -> sim_snr.json (250 frames per point; roughly 4 minutes on 2 cores)
-python3 figs_a.py            # signal, waterfall, timing, packing, Costas and sync figures -> figs/ (fig01 to fig09)
-python3 figs_b.py            # LDPC, belief propagation, SNR, Shannon and decode-probability figures -> figs/ (fig10 to fig14)
+python3 capacity.py
+python3 sim_snr.py 250
+python3 figs_a.py
+python3 figs_b.py
 ```
+
+- `capacity.py` computes the 8-FSK capacity and the SNR ladder and writes `capacity.json` (about 10 seconds).
+- `sim_snr.py` measures decode probability versus SNR, 250 frames per point, and writes `sim_snr.json` (roughly 4 minutes on 2 cores).
+- `figs_a.py` makes the signal, waterfall, timing, packing, Costas and sync figures in `figs/` (fig01 to fig09).
+- `figs_b.py` makes the LDPC, belief-propagation, SNR, Shannon and decode-probability figures (fig10 to fig14).
 
 The numbers in the PNG file names are not the paper's figure numbers (for example, `fig06_gfsk.png` is Figure 3 in the paper).
 `figs_b.py` reads `capacity.json` and `sim_snr.json`.
@@ -132,6 +142,8 @@ This compares the 79 tones from `ft8.py` against the C encoder for a set of test
 ## 7. Troubleshooting
 
 - **`ModuleNotFoundError: No module named 'ft8'`**: run from the repository root, not from inside `examples/`.
+- **`RuntimeWarning` about divide by zero, overflow or invalid value in `matmul`**: some macOS numpy builds raise these spuriously; the code now suppresses them and checks that the results are finite. If you still see them, update with `git pull`.
+- **The tones printed are not the ones shown here**: check the message was quoted and had no trailing `# comment`. Free text is limited to 13 characters, and the program now says so instead of truncating.
 - **`FileNotFoundError: ldpc_tables.npz`**: same cause. The file is in the repository root.
 - **Matplotlib window or backend errors on a server**: set `MPLBACKEND=Agg`; the figure scripts only write PNG files.
 - **A `sim_snr.py` run takes a long time**: lower the frame count (`python3 sim_snr.py 50`), or edit `Pool(2)` to use more cores.

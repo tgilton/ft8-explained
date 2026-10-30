@@ -1,6 +1,6 @@
 #!/bin/bash
 # Compare the Python encoder with the independent C reference (ft8_lib gen_ft8) on several messages.
-REF=/home/claude/ref/ft8_lib
+REF=${FT8_LIB:-$HOME/ft8_lib}   # path to a built ft8_lib checkout (needs ./gen_ft8); override with FT8_LIB=/path
 fail=0
 while IFS= read -r msg; do
   ref=$($REF/gen_ft8 "$msg" /tmp/ref_$$.wav 2>&1 | grep "FSK tones" | awk '{print $3}')

@@ -20,6 +20,9 @@ means in light of Shannon's theorem. It is written for working hams; the quantit
 | `figs_a.py`, `figs_b.py` | Figure scripts (output to `figs/`) |
 | `extract_tables.py` | Builds `ldpc_tables.npz` from `ft8_lib`'s `constants.c` |
 | `validate_encoder.sh` | Compares the encoder's 79 tones with the `ft8_lib` C reference (`gen_ft8`) |
+| `examples/` | Three short runnable scripts: noisy decode, LDPC error correction, WAV file for WSJT-X |
+
+**New here? See [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md)** for setup, three runnable examples, experiments to try, and a map from the paper's sections to the code.
 
 ## Quick start
 
@@ -35,7 +38,7 @@ the reference waveform, and the reference decoder decodes this audio. Not every 
 (no hashed or non-standard calls, DXpedition or contest types). The receiver omits OSD, multi-symbol detection,
 a-priori decoding and signal subtraction, so it is about 1.3 dB less sensitive than WSJT-X. Noise is white Gaussian only.
 
-`validate_encoder.sh` expects `ft8_lib` built at `/home/claude/ref/ft8_lib`; edit `REF=` to match your path.
+`validate_encoder.sh` needs a built `ft8_lib`; point it there with `FT8_LIB=/path/to/ft8_lib ./validate_encoder.sh`.
 
 ## Credits
 

@@ -79,7 +79,8 @@ def fig03():
         y = 1.0 if who == 'W7TLG' else 0.0
         col = BLUE if who == 'W7TLG' else ORANGE
         b.add_patch(Rectangle((k * 15 + 0.5, y), 12.64, 0.7, color=col, alpha=0.85))
-        b.text(k * 15 + 6.8, y + 0.35, txt, ha='center', va='center', color='white', fontsize=7.2)
+        first, _, last = txt.rpartition(' ')
+        b.text(k * 15 + 6.8, y + 0.35, first + '\n' + last, ha='center', va='center', color='white', fontsize=6.6, linespacing=1.15)
     for k in range(7): b.axvline(k * 15, color=SEC, lw=0.5, ls=':')
     for k in range(6): b.text(k * 15 + 7.5, 1.85, 'even' if k % 2 == 0 else 'odd', ha='center', fontsize=8, color=SEC)
     b.set_yticks([0.35, 1.35]); b.set_yticklabels(['K1ABC', 'W7TLG']); b.set_xticks([0, 15, 30, 45, 60, 75, 90]); b.set_xticklabels([':00', ':15', ':30', ':45', ':00', ':15', ':30'])
@@ -93,16 +94,16 @@ def fig04():
         x = 0
         for w, lab, col in parts:
             ax.add_patch(Rectangle((x + 0.4, y), w - 0.8, 0.62, color=col, lw=0))
-            ax.text(x + w / 2, y + 0.31, lab, ha='center', va='center', fontsize=8, color='white')
+            ax.text(x + w / 2, y + 0.31, lab, ha='center', va='center', fontsize=8 if w > 30 else 7, color='white')
             x += w
     bar(3.6, [(77, '77 message bits', BLUE)])
-    bar(2.7, [(77, '77 message bits', BLUE), (14, 'CRC 14', VIOLET)])
+    bar(2.7, [(77, '77 message bits', BLUE), (14, 'CRC', VIOLET)])
     bar(1.8, [(77, '77 message bits', BLUE), (14, 'CRC', VIOLET), (83, '83 LDPC parity bits', AQUA)])
     parts = []
     for i, (w, lab, col) in enumerate([(21, 'S7', ORANGE), (87, '29 data symbols', SEC), (21, 'S7', ORANGE), (87, '29 data symbols', SEC), (21, 'S7', ORANGE)]):
         parts.append((w, lab, col))
     bar(0.9, parts)
-    for y, t in [(3.6, 'payload'), (2.7, '91 bits protected by CRC'), (1.8, '174-bit codeword'), (0.9, '79 channel symbols')]:
+    for y, t in [(3.6, 'payload'), (2.7, '91 bits: 77 + 14-bit CRC'), (1.8, '174-bit codeword'), (0.9, '79 channel symbols')]:
         ax.text(-3, y + 0.31, t, ha='right', va='center', fontsize=8.5)
     ax.text(237 / 2, 0.45, 'each data symbol carries 3 codeword bits (58 x 3 = 174); each S7 is a 7-tone Costas sync block', ha='center', fontsize=8, color=SEC)
     ax.set_xlim(-70, 240); ax.set_ylim(0.2, 4.4); ax.axis('off')

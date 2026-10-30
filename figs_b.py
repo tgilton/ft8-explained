@@ -82,12 +82,15 @@ def fig13():
     plt.tight_layout(); save('fig13_shannon'); return thr
 
 def fig14():
-    sim = json.load(open('sim_snr.json')); fig, ax = plt.subplots(figsize=(6.6, 3.2))
+    sim = json.load(open('sim_snr.json')); fig, ax = plt.subplots(figsize=(6.6, 3.5))
+    ax.axvspan(-24.5, -21, color='#e3e2dd', alpha=0.6, lw=0); ax.axvspan(-21, -18, color=ORANGE, alpha=0.13, lw=0); ax.axvspan(-18, -14.5, color=BLUE, alpha=0.08, lw=0)
+    for x, lab in ((-22.75, 'out of reach'), (-19.5, 'every dB counts'), (-16.25, 'decodes anyway')):
+        ax.text(x, 1.085, lab, ha='center', va='bottom', fontsize=8, color=INK)
     for mode, col, lab in (('ideal', BLUE, 'time and frequency known'), ('sync', ORANGE, 'with Costas search')):
         d = sim[mode]; s = sorted(int(k) for k in d); p = [d[str(k)]['good'] / d[str(k)]['n'] for k in s]
         ax.plot(s, p, 'o-', color=col, lw=1.4, ms=4, label=lab)
-    ax.axvline(-20.8, color=SEC, ls='--', lw=1); ax.text(-20.9, 0.05, 'WSJT-X published\n50% point (-20.8 dB)', ha='right', fontsize=7.5, color=SEC)
-    ax.set_xlim(-24.5, -14.5); ax.set_xlabel('SNR in 2500 Hz (dB)'); ax.set_ylabel('Probability of correct decode'); ax.legend(frameon=False, fontsize=8, loc='center right'); ax.grid(color=GRID, lw=0.6)
+    ax.axvline(-20.8, color=SEC, ls='--', lw=1); ax.text(-20.9, 0.55, 'WSJT-X published\n50% point (-20.8 dB)', ha='right', fontsize=7.5, color=SEC)
+    ax.set_xlim(-24.5, -14.5); ax.set_ylim(-0.03, 1.05); ax.set_xlabel('SNR in 2500 Hz (dB)'); ax.set_ylabel('Probability of correct decode'); ax.legend(frameon=False, fontsize=8, loc='lower right'); ax.grid(color=GRID, lw=0.6)
     plt.tight_layout(); save('fig14_decode_probability')
 
 if __name__ == '__main__':
